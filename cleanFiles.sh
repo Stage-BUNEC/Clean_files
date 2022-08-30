@@ -1,14 +1,14 @@
 #!/bin/bash
 
-# [ Date ] : 30-08-2022
+# [ Date ]        : 30-08-2022
 # [ Description ] : Ce script sert à bien renommer les fichiers *.pdf et *.txt
-# [ Author(s) ] : Mr PROSPERE OTTOU / Mr GAEL MANI / NANFACK STEVE
+# [ Author(s) ]   : Mr PROSPERE OTTOU / Mr GAEL MANI / NANFACK STEVE
 
 # On remplace les espaces par des "_"
 for file in *.txt; do mv "$file" "${file// /_}"; done
 for file in *.pdf; do mv "$file" "${file// /_}"; done
 
-# On renomme tous les fichiers qui n'ont pas de num de registre
+# # On renomme tous les fichiers qui n'ont pas de num de registre
 i=1
 rplNbr=0
 for file in $(ls -t | grep -E "^[_]**.pdf|^[_]**.txt"); do
@@ -55,4 +55,11 @@ for file in *.pdf; do
     newName=$(echo "$file" | sed -E s/"(_{2,})"/_/g)
     mv "$file" "$newName"
 done
-one
+
+# Ajout du "#" a la fin du fichier *.txt
+for file in *.txt; do
+    sed s/$/'#'/g $file >tmp
+    cat tmp >$file
+done
+rm tmp
+
