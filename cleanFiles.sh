@@ -2,10 +2,11 @@
 
 # [ Date ] : 30-08-2022
 # [ Description ] : Ce script sert à bien renommer les fichiers *.pdf et *.txt
-# [ Author(s) ] : NANFACK STEVE 
+# [ Author(s) ] : Mr PROSPERE OTTOU / Mr GAEL MANI / NANFACK STEVE
 
 # On remplace les espaces par des "_"
-for file in *; do mv "$file" "${file// /_}"; done
+for file in *.txt; do mv "$file" "${file// /_}"; done
+for file in *.pdf; do mv "$file" "${file// /_}"; done
 
 # On renomme tous les fichiers qui n'ont pas de num de registre
 i=1
@@ -42,3 +43,16 @@ for file in $(ls -t | grep -E "*(_{1,}.pdf)$"); do
     newEnd=$(echo $file | sed -E s/"(_{1,}.pdf)$"/.pdf/g)
     mv "$file" "$newEnd"
 done
+
+# On remplace plusieurs "_" par un seul
+
+for file in *.txt; do
+    newName=$(echo "$file" | sed -E s/"(_{2,})"/_/g)
+    mv "$file" "$newName"
+done
+
+for file in *.pdf; do
+    newName=$(echo "$file" | sed -E s/"(_{2,})"/_/g)
+    mv "$file" "$newName"
+done
+one
